@@ -19,6 +19,12 @@
 - Скрипт автодеплоя ещё не написан — предстоит сделать (build → загрузка
   `dist/` в `/cavinum.me/web/` по SFTP).
 
+## Деплой на новой машине
+
+- Скопировать `deploy.config.example.json` в `deploy.config.json` и заполнить
+  реальными host/port/username/remotePath. `deploy.config.json` в
+  `.gitignore` — не коммитить.
+
 ## Открытые вопросы
 
 - Обработка формы обратной связи ещё не решена. PHP на хостинге есть (8.4.24),

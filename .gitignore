@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# real SFTP host/username, filled in manually per machine
+deploy.config.json
+
 # macOS-specific files
 .DS_Store
 
