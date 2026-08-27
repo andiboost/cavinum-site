@@ -1,0 +1,22 @@
+---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { ui, defaultLang } from '../i18n/ui';
+
+const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
+const t = ui[lang];
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{t.title}</title>
+	</head>
+	<body>
+		<LanguageSwitcher />
+		<h1>{t.title}</h1>
+		<p>{t.placeholder}</p>
+	</body>
+</html>
