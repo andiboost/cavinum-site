@@ -2,7 +2,7 @@
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import Card from '../components/Card.astro';
 import IconBottle from '../components/icons/IconBottle.astro';
-import IconMapPin from '../components/icons/IconMapPin.astro';
+import IconGrape from '../components/icons/IconGrape.astro';
 import IconBookOpen from '../components/icons/IconBookOpen.astro';
 import { ui, defaultLang } from '../i18n/ui';
 
@@ -21,7 +21,10 @@ const t = ui[lang];
 	</head>
 	<body>
 		<header class="site-header">
-			<span class="site-header__brand">{t.title}</span>
+			<span class="site-header__brand">
+				<IconBottle class="site-header__mark" />
+				{t.title}
+			</span>
 			<LanguageSwitcher />
 		</header>
 
@@ -29,7 +32,7 @@ const t = ui[lang];
 			<section class="hero">
 				<div class="hero__glyph" aria-hidden="true">
 					<span class="hero__glyph-bottle"><IconBottle /></span>
-					<span class="hero__glyph-pin"><IconMapPin /></span>
+					<span class="hero__glyph-pin"><IconGrape /></span>
 					<span class="hero__glyph-book"><IconBookOpen /></span>
 				</div>
 				<h1 class="hero__title">{t.hero.title}</h1>
@@ -97,22 +100,30 @@ const t = ui[lang];
 				align-items: center;
 				justify-content: space-between;
 				gap: 1rem;
-				padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 5vw, 3rem);
+				padding: clamp(0.75rem, 2.5vw, 1.25rem) clamp(1rem, 5vw, 3rem);
 				max-width: var(--max-width);
 				margin-inline: auto;
 			}
 
 			.site-header__brand {
-				font-weight: 700;
-				font-size: clamp(1.1rem, 2vw, 1.35rem);
-				letter-spacing: 0.02em;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4em;
+				font-weight: 800;
+				font-size: clamp(1.4rem, 3vw, 1.9rem);
+				letter-spacing: -0.01em;
+			}
+
+			.site-header__mark {
+				color: var(--accent);
+				flex-shrink: 0;
 			}
 
 			main {
 				display: flex;
 				flex-direction: column;
-				gap: clamp(3rem, 8vw, 6rem);
-				padding-block-end: clamp(3rem, 8vw, 6rem);
+				gap: clamp(2.5rem, 6vw, 4.5rem);
+				padding-block-end: clamp(2.5rem, 6vw, 4.5rem);
 			}
 
 			.hero {
@@ -120,11 +131,11 @@ const t = ui[lang];
 				flex-direction: column;
 				align-items: center;
 				text-align: center;
-				gap: clamp(1rem, 3vw, 1.5rem);
+				gap: clamp(0.875rem, 2.5vw, 1.25rem);
 				max-width: 48rem;
 				margin-inline: auto;
-				padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
-				min-height: clamp(20rem, 70svh, 40rem);
+				padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 5vw, 3rem);
+				min-height: clamp(16rem, 55svh, 28rem);
 				justify-content: center;
 			}
 
@@ -191,7 +202,7 @@ const t = ui[lang];
 				padding-inline: clamp(1rem, 5vw, 3rem);
 				display: flex;
 				flex-direction: column;
-				gap: clamp(1.5rem, 4vw, 2.5rem);
+				gap: clamp(1.1rem, 3vw, 1.8rem);
 			}
 
 			.section__heading {
@@ -210,11 +221,11 @@ const t = ui[lang];
 			.grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-				gap: clamp(1rem, 2.5vw, 1.5rem);
+				gap: clamp(0.875rem, 2vw, 1.25rem);
 			}
 
 			.section--features {
-				gap: clamp(1rem, 2.5vw, 1.5rem);
+				gap: clamp(0.875rem, 2vw, 1.25rem);
 			}
 
 			.button {
