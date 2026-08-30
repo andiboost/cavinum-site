@@ -1,7 +1,6 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import Card from '../components/Card.astro';
-import IconBottle from '../components/icons/IconBottle.astro';
 import IconGlassMark from '../components/icons/IconGlassMark.astro';
 import { ui, defaultLang } from '../i18n/ui';
 
@@ -31,9 +30,6 @@ const t = ui[lang];
 
 		<main>
 			<section class="hero">
-				<div class="hero__glyph" aria-hidden="true">
-					<IconBottle />
-				</div>
 				<h1 class="hero__title">{t.hero.title}</h1>
 				<p class="hero__subtitle">{t.hero.subtitle}</p>
 				<a class="button" href="#download">{t.hero.cta}</a>
@@ -158,14 +154,6 @@ const t = ui[lang];
 				padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 5vw, 3rem);
 				min-height: clamp(16rem, 55svh, 28rem);
 				justify-content: center;
-			}
-
-			.hero__glyph {
-				font-size: clamp(4rem, 12vw, 6rem);
-				width: 1em;
-				height: 1em;
-				color: var(--accent);
-				line-height: 0;
 			}
 
 			.hero__title {
