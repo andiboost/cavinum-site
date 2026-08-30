@@ -1,0 +1,45 @@
+---
+import IconGlassWater from './IconGlassWater.astro';
+
+interface Props {
+	class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['icon-glasses-pair', className]}>
+	<span class="icon-glasses-pair__back"><IconGlassWater /></span>
+	<span class="icon-glasses-pair__front"><IconGlassWater /></span>
+</span>
+
+<style>
+	.icon-glasses-pair {
+		position: relative;
+		display: inline-grid;
+		place-items: center;
+		width: 1em;
+		height: 1em;
+	}
+	.icon-glasses-pair__back,
+	.icon-glasses-pair__front {
+		position: absolute;
+		display: block;
+		width: 0.72em;
+		height: 0.72em;
+	}
+	.icon-glasses-pair__back :global(svg),
+	.icon-glasses-pair__front :global(svg) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.icon-glasses-pair__back {
+		top: 0;
+		left: 0;
+		opacity: 0.55;
+	}
+	.icon-glasses-pair__front {
+		bottom: 0;
+		right: 0;
+	}
+</style>

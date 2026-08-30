@@ -1,5 +1,9 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import Card from '../components/Card.astro';
+import IconBottle from '../components/icons/IconBottle.astro';
+import IconMapPin from '../components/icons/IconMapPin.astro';
+import IconBookOpen from '../components/icons/IconBookOpen.astro';
 import { ui, defaultLang } from '../i18n/ui';
 
 const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
@@ -10,13 +14,234 @@ const t = ui[lang];
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={t.meta.description} />
 		<title>{t.title}</title>
 	</head>
 	<body>
-		<LanguageSwitcher />
-		<h1>{t.title}</h1>
-		<p>{t.placeholder}</p>
+		<header class="site-header">
+			<span class="site-header__brand">{t.title}</span>
+			<LanguageSwitcher />
+		</header>
+
+		<main>
+			<section class="hero">
+				<div class="hero__glyph" aria-hidden="true">
+					<span class="hero__glyph-bottle"><IconBottle /></span>
+					<span class="hero__glyph-pin"><IconMapPin /></span>
+					<span class="hero__glyph-book"><IconBookOpen /></span>
+				</div>
+				<h1 class="hero__title">{t.hero.title}</h1>
+				<p class="hero__subtitle">{t.hero.subtitle}</p>
+				<a class="button" href="#download">{t.hero.cta}</a>
+			</section>
+
+			<section class="section">
+				<h2 class="section__heading">{t.forYou.heading}</h2>
+				<div class="grid">
+					{t.forYou.items.map((item) => <Card icon={item.icon} text={item.text} />)}
+				</div>
+			</section>
+
+			<section class="section">
+				<h2 class="section__heading">{t.choosing.heading}</h2>
+				<div class="grid">
+					{t.choosing.items.map((item) => <Card icon={item.icon} text={item.text} />)}
+				</div>
+			</section>
+
+			<section class="section">
+				<h2 class="section__heading">{t.learning.heading}</h2>
+				<p class="section__text">{t.learning.text}</p>
+			</section>
+
+			<section class="section section--features">
+				<Card icon={t.selfGuided.icon} text={t.selfGuided.text} variant="row" />
+				<Card icon={t.openStructure.icon} text={t.openStructure.text} variant="row" />
+			</section>
+
+			<section class="closing" id="download">
+				<a class="button button--large" href="#download">{t.closing.cta}</a>
+			</section>
+		</main>
+
+		<style>
+			:root {
+				--ink: #2a1f1a;
+				--paper: #fbf7f2;
+				--surface: #f3ebe1;
+				--accent: #7a2334;
+				--accent-soft: #f0dfe1;
+				--max-width: 68rem;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				color-scheme: light;
+			}
+
+			body {
+				margin: 0;
+				background: var(--paper);
+				color: var(--ink);
+				font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+				line-height: 1.5;
+			}
+
+			.site-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 5vw, 3rem);
+				max-width: var(--max-width);
+				margin-inline: auto;
+			}
+
+			.site-header__brand {
+				font-weight: 700;
+				font-size: clamp(1.1rem, 2vw, 1.35rem);
+				letter-spacing: 0.02em;
+			}
+
+			main {
+				display: flex;
+				flex-direction: column;
+				gap: clamp(3rem, 8vw, 6rem);
+				padding-block-end: clamp(3rem, 8vw, 6rem);
+			}
+
+			.hero {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				gap: clamp(1rem, 3vw, 1.5rem);
+				max-width: 48rem;
+				margin-inline: auto;
+				padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
+				min-height: clamp(20rem, 70svh, 40rem);
+				justify-content: center;
+			}
+
+			.hero__glyph {
+				position: relative;
+				font-size: clamp(4rem, 12vw, 6rem);
+				width: 1em;
+				height: 1em;
+				color: var(--accent);
+			}
+
+			.hero__glyph-bottle,
+			.hero__glyph-pin,
+			.hero__glyph-book {
+				position: absolute;
+				display: block;
+			}
+
+			.hero__glyph-bottle :global(svg),
+			.hero__glyph-pin :global(svg),
+			.hero__glyph-book :global(svg) {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+
+			.hero__glyph-bottle {
+				inset: 0;
+			}
+
+			.hero__glyph-pin {
+				bottom: -0.2em;
+				left: -0.35em;
+				width: 0.55em;
+				height: 0.55em;
+				opacity: 0.7;
+			}
+
+			.hero__glyph-book {
+				bottom: -0.15em;
+				right: -0.4em;
+				width: 0.6em;
+				height: 0.6em;
+				opacity: 0.7;
+			}
+
+			.hero__title {
+				font-size: clamp(1.75rem, 5vw, 3rem);
+				line-height: 1.15;
+				margin: 0;
+			}
+
+			.hero__subtitle {
+				font-size: clamp(1rem, 2.2vw, 1.25rem);
+				color: color-mix(in srgb, var(--ink) 75%, transparent);
+				margin: 0;
+				max-width: 38rem;
+			}
+
+			.section {
+				width: 100%;
+				max-width: var(--max-width);
+				margin-inline: auto;
+				padding-inline: clamp(1rem, 5vw, 3rem);
+				display: flex;
+				flex-direction: column;
+				gap: clamp(1.5rem, 4vw, 2.5rem);
+			}
+
+			.section__heading {
+				font-size: clamp(1.4rem, 3.2vw, 2rem);
+				margin: 0;
+				text-align: center;
+			}
+
+			.section__text {
+				font-size: clamp(1rem, 2vw, 1.15rem);
+				max-width: 42rem;
+				margin-inline: auto;
+				text-align: center;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+				gap: clamp(1rem, 2.5vw, 1.5rem);
+			}
+
+			.section--features {
+				gap: clamp(1rem, 2.5vw, 1.5rem);
+			}
+
+			.button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 44px;
+				min-width: 44px;
+				padding: 0.85rem 1.75rem;
+				border-radius: 999px;
+				background: var(--accent);
+				color: var(--paper);
+				text-decoration: none;
+				font-weight: 600;
+				font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+			}
+
+			.button--large {
+				padding: 1rem 2.25rem;
+				font-size: clamp(1rem, 2vw, 1.2rem);
+			}
+
+			.closing {
+				display: flex;
+				justify-content: center;
+				padding-inline: clamp(1rem, 5vw, 3rem);
+			}
+		</style>
 	</body>
 </html>
