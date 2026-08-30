@@ -2,8 +2,7 @@
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import Card from '../components/Card.astro';
 import IconBottle from '../components/icons/IconBottle.astro';
-import IconGrape from '../components/icons/IconGrape.astro';
-import IconBookOpen from '../components/icons/IconBookOpen.astro';
+import IconGlassMark from '../components/icons/IconGlassMark.astro';
 import { ui, defaultLang } from '../i18n/ui';
 
 const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
@@ -22,8 +21,10 @@ const t = ui[lang];
 	<body>
 		<header class="site-header">
 			<span class="site-header__brand">
-				<IconBottle class="site-header__mark" />
-				{t.title}
+				<span class="sr-only">{t.title}</span>
+				<span class="site-header__word" aria-hidden="true"
+					>Ca<span class="site-header__v"><IconGlassMark /></span>inum</span
+				>
 			</span>
 			<LanguageSwitcher />
 		</header>
@@ -31,9 +32,7 @@ const t = ui[lang];
 		<main>
 			<section class="hero">
 				<div class="hero__glyph" aria-hidden="true">
-					<span class="hero__glyph-bottle"><IconBottle /></span>
-					<span class="hero__glyph-pin"><IconGrape /></span>
-					<span class="hero__glyph-book"><IconBookOpen /></span>
+					<IconBottle />
 				</div>
 				<h1 class="hero__title">{t.hero.title}</h1>
 				<p class="hero__subtitle">{t.hero.subtitle}</p>
@@ -72,15 +71,26 @@ const t = ui[lang];
 		<style>
 			:root {
 				--ink: #2a1f1a;
-				--paper: #fbf7f2;
-				--surface: #f3ebe1;
-				--accent: #7a2334;
-				--accent-soft: #f0dfe1;
+				--paper: #fdf6ec;
+				--surface: #f8e6d4;
+				--accent: #7b1e3a;
 				--max-width: 68rem;
 			}
 
 			* {
 				box-sizing: border-box;
+			}
+
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border: 0;
 			}
 
 			html {
@@ -106,17 +116,28 @@ const t = ui[lang];
 			}
 
 			.site-header__brand {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4em;
+				display: inline-block;
 				font-weight: 800;
 				font-size: clamp(1.4rem, 3vw, 1.9rem);
 				letter-spacing: -0.01em;
 			}
 
-			.site-header__mark {
+			.site-header__word {
+				display: inline-block;
+			}
+
+			.site-header__v {
+				display: inline-block;
+				height: 0.72em;
 				color: var(--accent);
-				flex-shrink: 0;
+				vertical-align: -0.02em;
+				margin-inline: 0.02em;
+			}
+
+			.site-header__v :global(svg) {
+				display: block;
+				height: 100%;
+				width: auto;
 			}
 
 			main {
@@ -140,46 +161,11 @@ const t = ui[lang];
 			}
 
 			.hero__glyph {
-				position: relative;
 				font-size: clamp(4rem, 12vw, 6rem);
 				width: 1em;
 				height: 1em;
 				color: var(--accent);
-			}
-
-			.hero__glyph-bottle,
-			.hero__glyph-pin,
-			.hero__glyph-book {
-				position: absolute;
-				display: block;
-			}
-
-			.hero__glyph-bottle :global(svg),
-			.hero__glyph-pin :global(svg),
-			.hero__glyph-book :global(svg) {
-				display: block;
-				width: 100%;
-				height: 100%;
-			}
-
-			.hero__glyph-bottle {
-				inset: 0;
-			}
-
-			.hero__glyph-pin {
-				bottom: -0.2em;
-				left: -0.35em;
-				width: 0.55em;
-				height: 0.55em;
-				opacity: 0.7;
-			}
-
-			.hero__glyph-book {
-				bottom: -0.15em;
-				right: -0.4em;
-				width: 0.6em;
-				height: 0.6em;
-				opacity: 0.7;
+				line-height: 0;
 			}
 
 			.hero__title {

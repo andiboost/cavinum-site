@@ -1,0 +1,17 @@
+---
+interface Props {
+	class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="14 10 72 82"
+	fill="currentColor"
+	class={className}
+>
+	<polygon points="18,10 82,10 53.5,55 46.5,55" />
+	<rect x="46.5" y="55" width="7" height="30" />
+	<rect x="32" y="85" width="36" height="7" />
+</svg>
