@@ -3,13 +3,14 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import { languages } from '../i18n/ui';
 
 const currentLocale = Astro.currentLocale ?? 'ru';
+const currentPath = Astro.url.pathname.includes('privacy') ? '/privacy' : '/';
 ---
 
 <nav aria-label="Language switcher">
 	{
 		Object.entries(languages).map(([lang, label]) => (
 			<a
-				href={getRelativeLocaleUrl(lang, '/')}
+				href={getRelativeLocaleUrl(lang, currentPath)}
 				aria-current={lang === currentLocale ? 'page' : undefined}
 			>
 				{label}

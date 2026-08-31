@@ -12,6 +12,12 @@ export const ui = {
 			description:
 				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой — без опыта сомелье.',
 		},
+		footer: {
+			privacy: 'Политика конфиденциальности',
+		},
+		privacy: {
+			title: 'Cavinum — Политика конфиденциальности',
+		},
 		hero: {
 			title: 'Ваш винный погреб. С историей каждой бутылки.',
 			subtitle:
@@ -74,6 +80,12 @@ export const ui = {
 		meta: {
 			description:
 				"Cavinum helps you track your wine collection and uncover the culture, history, and legends behind every bottle — no sommelier training required.",
+		},
+		footer: {
+			privacy: 'Privacy Policy',
+		},
+		privacy: {
+			title: 'Cavinum — Privacy Policy',
 		},
 		hero: {
 			title: 'Your wine cellar. With a story behind every bottle.',

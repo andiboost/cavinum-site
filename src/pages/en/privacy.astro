@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui';
+
+const t = ui.en.privacy;
+---
+
+<Base title={t.title} description={t.title}>
+	<article class="prose">
+		<h1>Cavinum — Privacy Policy</h1>
+		<p class="prose__updated">Last updated: August 31, 2026</p>
+
+		<h2>What Cavinum is</h2>
+		<p>
+			Cavinum is a personal home wine-cellar inventory app. It's a non-commercial, single-developer
+			project with no advertising and no built-in analytics.
+		</p>
+
+		<h2>What data the app processes</h2>
+		<p>
+			Your collection data (wine names, varieties, cabinets/shelves, notes, and photos you add
+			yourself) is stored locally, in your browser — in a SQLite database built on OPFS (Origin
+			Private File System). This data never leaves your device unless you explicitly enable Google
+			Drive sync.
+		</p>
+		<p>
+			The app has no server or database of its own. The developer has no access to your collection
+			data under any circumstances.
+		</p>
+
+		<h2>Google Drive sync (optional)</h2>
+		<p>
+			If you connect your Google account, the app requests the Google OAuth drive.file scope — a
+			restricted Google permission that grants access only to files the app itself has created. The
+			app creates a single file (cavinum.db) inside a dedicated "Cavinum" folder in your Drive, and
+			cannot see, read, or modify any other files, folders, or data in your Google account.
+		</p>
+		<p>
+			The authorization-code-to-token exchange technically passes through the developer's own proxy
+			server (a Cloudflare Worker), required by the OAuth protocol. The proxy does not store or log
+			your tokens or any personal data — it only relays the request to Google and returns the
+			response.
+		</p>
+		<p>
+			Google Drive access tokens are stored locally in your browser (localStorage) and are never
+			sent to the developer or any third party.
+		</p>
+
+		<h2>What the app does NOT do</h2>
+		<ul>
+			<li>No advertising.</li>
+			<li>No analytics, trackers, or third-party SDKs collecting data.</li>
+			<li>No selling or sharing your data with third parties.</li>
+			<li>No data collection without your explicit action (adding a wine, connecting Drive, etc.).</li>
+		</ul>
+
+		<h2>Managing your data</h2>
+		<ul>
+			<li>
+				You can disconnect Google Drive at any time in the app's settings — local tokens are
+				removed from your device immediately.
+			</li>
+			<li>
+				The cavinum.db file in your Google Drive remains entirely under your control — you can
+				delete it directly via drive.google.com at any time.
+			</li>
+			<li>
+				You can clear all local app data via your browser's site data settings, or via the app's
+				own export/reset feature if available.
+			</li>
+		</ul>
+
+		<h2>Children</h2>
+		<p>The app is not directed at children and does not knowingly collect data specifically targeting children.</p>
+
+		<h2>Changes to this policy</h2>
+		<p>If how the app processes data changes materially, this page will be updated with a new date above.</p>
+
+		<h2>Contact</h2>
+		<p>For questions about this policy — via the feedback form on cavinum.me.</p>
+	</article>
+
+	<style>
+		.prose {
+			width: 100%;
+			max-width: 40rem;
+			margin-inline: auto;
+			padding-inline: clamp(1rem, 5vw, 3rem);
+		}
+
+		.prose h1 {
+			font-size: clamp(1.6rem, 4vw, 2.25rem);
+			line-height: 1.2;
+			margin: 0 0 0.5rem;
+		}
+
+		.prose__updated {
+			color: color-mix(in srgb, var(--ink) 65%, transparent);
+			font-size: 0.95rem;
+			margin: 0 0 2rem;
+		}
+
+		.prose h2 {
+			font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+			margin: 2.25rem 0 0.75rem;
+		}
+
+		.prose h2:first-of-type {
+			margin-top: 0;
+		}
+
+		.prose p {
+			font-size: 1rem;
+			line-height: 1.7;
+			margin: 0 0 1rem;
+		}
+
+		.prose ul {
+			margin: 0 0 1rem;
+			padding-inline-start: 1.25rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		.prose li {
+			font-size: 1rem;
+			line-height: 1.7;
+		}
+	</style>
+</Base>
