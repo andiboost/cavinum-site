@@ -1,5 +1,6 @@
 ---
 import Card from './Card.astro';
+import IconCorkscrew from './icons/IconCorkscrew.astro';
 import { ui, defaultLang } from '../i18n/ui';
 
 const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
@@ -9,7 +10,7 @@ const t = ui[lang];
 <section class="hero">
 	<h1 class="hero__title">
 		<span class="hero__title-line">{t.hero.title[0]}</span>
-		<span class="hero__divider" aria-hidden="true"></span>
+		<span class="hero__divider" aria-hidden="true"><IconCorkscrew /></span>
 		<span class="hero__title-line">{t.hero.title[1]}</span>
 	</h1>
 	<p class="hero__subtitle">{t.hero.subtitle}</p>
@@ -71,11 +72,17 @@ const t = ui[lang];
 	.hero__divider {
 		--hero-divider-gap: clamp(0.6rem, 1.5vw, 1rem);
 		display: block;
-		width: clamp(2.5rem, 6vw, 5rem);
-		height: clamp(2px, 0.3vw, 3px);
+		width: clamp(1.5rem, 3.5vw, 2.25rem);
 		margin-block: calc(var(--hero-divider-gap) * 1.15) calc(var(--hero-divider-gap) * 0.85);
 		margin-inline: auto;
-		background: var(--accent);
+		color: var(--accent);
+	}
+
+	.hero__divider :global(svg) {
+		display: block;
+		width: 100%;
+		height: auto;
+		transform: rotate(-90deg);
 	}
 
 	.hero__subtitle {
