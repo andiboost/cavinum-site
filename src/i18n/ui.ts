@@ -62,12 +62,8 @@ export const ui = {
 					text: 'Подобрать вино и бокалы к дегустации с друзьями',
 				},
 				{
-					icon: 'leaf',
-					text: 'Выбрать вино из коллекции, чтобы изучить регион и винодельню',
-				},
-				{
 					icon: 'grape',
-					text: 'Выбрать вино из каталога приложения — даже если его нет у вас дома',
+					text: 'Выбрать вино из коллекции, чтобы изучить регион и винодельню',
 				},
 			],
 		},
@@ -143,12 +139,8 @@ export const ui = {
 					text: 'Pick a wine and glasses for a tasting with friends',
 				},
 				{
-					icon: 'leaf',
-					text: 'Pick a wine from your collection to explore its region and winery',
-				},
-				{
 					icon: 'grape',
-					text: "Pick a wine from the app's catalog — even one you don't own",
+					text: 'Pick a wine from your collection to explore its region and winery',
 				},
 			],
 		},
