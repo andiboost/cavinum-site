@@ -10,7 +10,7 @@ export const ui = {
 		title: 'Cavinum',
 		meta: {
 			description:
-				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой — без опыта сомелье.',
+				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой.',
 		},
 		footer: {
 			privacy: 'Политика конфиденциальности',
@@ -21,7 +21,7 @@ export const ui = {
 		hero: {
 			title: ['Ваш винный погреб', 'История в каждой бутылке'],
 			subtitle:
-				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой — без опыта сомелье.',
+				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой',
 			cta: 'Скачать бесплатно',
 		},
 		forYou: {
@@ -61,15 +61,15 @@ export const ui = {
 		},
 		learning: {
 			heading: 'Изучение вина',
-			text: 'О каждом вине — своём или из каталога — узнайте регион, апелласьон, историю винодельни, винодела или энолога, легенды и истории.',
+			text: 'О каждом вине — своём или из каталога — узнайте регион, апелласьон, историю винодельни, винодела или энолога, легенды и истории',
 		},
 		selfGuided: {
 			icon: 'compass',
-			text: 'Погружайтесь в мир вина самостоятельно — без курсов сомелье и специальной подготовки.',
+			text: 'Погружайтесь в мир вина самостоятельно — без курсов сомелье и специальной подготовки',
 		},
 		openStructure: {
 			icon: 'puzzle',
-			text: 'Дополняйте и настраивайте информацию под свои задачи — структура открыта.',
+			text: 'Дополняйте и настраивайте информацию под свои задачи — структура открыта',
 		},
 		closing: {
 			cta: 'Скачать бесплатную версию',
@@ -90,7 +90,7 @@ export const ui = {
 		hero: {
 			title: ['Your wine cellar', 'A story in every bottle'],
 			subtitle:
-				"Cavinum helps you track your wine collection and uncover the culture, history, and legends behind every bottle — no sommelier training required.",
+				"Cavinum helps you track your wine collection and uncover the culture, history, and legends behind every bottle — no sommelier training required",
 			cta: 'Download for free',
 		},
 		forYou: {
@@ -130,15 +130,15 @@ export const ui = {
 		},
 		learning: {
 			heading: 'Learning about wine',
-			text: "For any wine — yours or from the catalog — discover its region, appellation, the winery's or winemaker's story, and the legends behind it.",
+			text: "For any wine — yours or from the catalog — discover its region, appellation, the winery's or winemaker's story, and the legends behind it",
 		},
 		selfGuided: {
 			icon: 'compass',
-			text: 'Explore the world of wine on your own — no sommelier courses, no special training.',
+			text: 'Explore the world of wine on your own — no sommelier courses, no special training',
 		},
 		openStructure: {
 			icon: 'puzzle',
-			text: 'Add and customize information to fit your own needs — the structure is open.',
+			text: 'Add and customize information to fit your own needs — the structure is open',
 		},
 		closing: {
 			cta: 'Download the free version',
