@@ -70,9 +70,9 @@ const t = ui[lang];
 
 	.hero__divider {
 		display: block;
-		width: 2.5rem;
-		height: 2px;
-		margin: 0.6rem auto;
+		width: clamp(2.5rem, 6vw, 5rem);
+		height: clamp(2px, 0.3vw, 3px);
+		margin: clamp(0.6rem, 1.5vw, 1rem) auto;
 		background: var(--accent);
 	}
 
