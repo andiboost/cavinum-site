@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import FeedbackModal from '../components/FeedbackModal.astro';
 import IconGlassMark from '../components/icons/IconGlassMark.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { ui, defaultLang } from '../i18n/ui';
@@ -41,7 +42,12 @@ const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
 
 		<footer class="site-footer">
 			<a href={privacyHref}>{t.footer.privacy}</a>
+			<button type="button" class="site-footer__button" data-open-feedback
+				>{t.footer.feedback}</button
+			>
 		</footer>
+
+		<FeedbackModal />
 
 		<style>
 			:root {
@@ -125,15 +131,25 @@ const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
 			.site-footer {
 				display: flex;
 				justify-content: center;
+				gap: 1.5rem;
 				padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 5vw, 3rem);
 				max-width: var(--max-width);
 				margin-inline: auto;
 			}
 
-			.site-footer a {
+			.site-footer a,
+			.site-footer__button {
 				color: color-mix(in srgb, var(--ink) 65%, transparent);
 				font-size: 0.9rem;
 				text-decoration: underline;
+			}
+
+			.site-footer__button {
+				background: none;
+				border: 0;
+				padding: 0;
+				font-family: inherit;
+				cursor: pointer;
 			}
 		</style>
 	</body>

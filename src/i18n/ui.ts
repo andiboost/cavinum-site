@@ -14,9 +14,21 @@ export const ui = {
 		},
 		footer: {
 			privacy: 'Политика конфиденциальности',
+			feedback: 'Обратная связь',
 		},
 		privacy: {
 			title: 'Cavinum — Политика конфиденциальности',
+		},
+		feedback: {
+			title: 'Обратная связь',
+			name: 'Имя',
+			subject: 'Тема',
+			message: 'Сообщение',
+			submit: 'Отправить',
+			sending: 'Отправка…',
+			success: 'Сообщение отправлено. Спасибо!',
+			error: 'Не удалось отправить сообщение. Попробуйте ещё раз позже.',
+			close: 'Закрыть',
 		},
 		hero: {
 			title: ['Ваш винный погреб', 'История в каждой бутылке'],
@@ -83,9 +95,21 @@ export const ui = {
 		},
 		footer: {
 			privacy: 'Privacy Policy',
+			feedback: 'Feedback',
 		},
 		privacy: {
 			title: 'Cavinum — Privacy Policy',
+		},
+		feedback: {
+			title: 'Feedback',
+			name: 'Name',
+			subject: 'Subject',
+			message: 'Message',
+			submit: 'Send',
+			sending: 'Sending…',
+			success: 'Message sent. Thank you!',
+			error: 'Could not send the message. Please try again later.',
+			close: 'Close',
 		},
 		hero: {
 			title: ['Your wine cellar', 'A story in every bottle'],
