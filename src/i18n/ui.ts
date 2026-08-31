@@ -19,7 +19,7 @@ export const ui = {
 			title: 'Cavinum — Политика конфиденциальности',
 		},
 		hero: {
-			title: 'Ваш винный погреб. С историей каждой бутылки.',
+			title: ['Ваш винный погреб', 'История в каждой бутылке'],
 			subtitle:
 				'Cavinum помогает вести учёт коллекции вин и открывать культуру, историю и легенды региона за каждой бутылкой — без опыта сомелье.',
 			cta: 'Скачать бесплатно',
@@ -88,7 +88,7 @@ export const ui = {
 			title: 'Cavinum — Privacy Policy',
 		},
 		hero: {
-			title: 'Your wine cellar. With a story behind every bottle.',
+			title: ['Your wine cellar', 'A story in every bottle'],
 			subtitle:
 				"Cavinum helps you track your wine collection and uncover the culture, history, and legends behind every bottle — no sommelier training required.",
 			cta: 'Download for free',
