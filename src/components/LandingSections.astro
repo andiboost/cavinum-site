@@ -69,10 +69,12 @@ const t = ui[lang];
 	}
 
 	.hero__divider {
+		--hero-divider-gap: clamp(0.6rem, 1.5vw, 1rem);
 		display: block;
 		width: clamp(2.5rem, 6vw, 5rem);
 		height: clamp(2px, 0.3vw, 3px);
-		margin: clamp(0.6rem, 1.5vw, 1rem) auto;
+		margin-block: calc(var(--hero-divider-gap) * 1.15) calc(var(--hero-divider-gap) * 0.85);
+		margin-inline: auto;
 		background: var(--accent);
 	}
 
