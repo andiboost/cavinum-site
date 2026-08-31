@@ -1,5 +1,5 @@
 ---
-import IconGlassWater from './IconGlassWater.astro';
+import IconFlute from './IconFlute.astro';
 
 interface Props {
 	class?: string;
@@ -8,8 +8,8 @@ const { class: className } = Astro.props;
 ---
 
 <span class:list={['icon-glasses-pair', className]}>
-	<span class="icon-glasses-pair__back"><IconGlassWater /></span>
-	<span class="icon-glasses-pair__front"><IconGlassWater /></span>
+	<span class="icon-glasses-pair__back"><IconFlute /></span>
+	<span class="icon-glasses-pair__front"><IconFlute /></span>
 </span>
 
 <style>
@@ -24,8 +24,9 @@ const { class: className } = Astro.props;
 	.icon-glasses-pair__front {
 		position: absolute;
 		display: block;
-		width: 0.72em;
-		height: 0.72em;
+		bottom: 0;
+		width: 0.85em;
+		height: 0.85em;
 	}
 	.icon-glasses-pair__back :global(svg),
 	.icon-glasses-pair__front :global(svg) {
@@ -34,12 +35,13 @@ const { class: className } = Astro.props;
 		height: 100%;
 	}
 	.icon-glasses-pair__back {
-		top: 0;
-		left: 0;
-		opacity: 0.55;
+		left: -0.2em;
+		transform: rotate(18deg);
+		transform-origin: bottom center;
 	}
 	.icon-glasses-pair__front {
-		bottom: 0;
-		right: 0;
+		right: -0.2em;
+		transform: rotate(-18deg);
+		transform-origin: bottom center;
 	}
 </style>
