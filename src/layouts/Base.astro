@@ -14,6 +14,7 @@ const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
 const t = ui[lang];
 const { title = t.title, description = t.meta.description } = Astro.props;
 const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
+const homeHref = getRelativeLocaleUrl(lang, '/');
 ---
 
 <html lang={lang}>
@@ -27,12 +28,12 @@ const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
 	</head>
 	<body>
 		<header class="site-header">
-			<span class="site-header__brand">
+			<a class="site-header__brand" href={homeHref}>
 				<span class="sr-only">{t.title}</span>
 				<span class="site-header__word" aria-hidden="true"
 					>Ca<span class="site-header__v"><IconGlassMark /></span>inum</span
 				>
-			</span>
+			</a>
 			<LanguageSwitcher />
 		</header>
 
@@ -101,6 +102,19 @@ const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
 				font-weight: 800;
 				font-size: clamp(1.4rem, 3vw, 1.9rem);
 				letter-spacing: -0.01em;
+				color: inherit;
+				text-decoration: none;
+				border-radius: 0.25rem;
+				transition: opacity 0.15s;
+			}
+
+			.site-header__brand:hover {
+				opacity: 0.8;
+			}
+
+			.site-header__brand:focus-visible {
+				outline: 2px solid var(--accent);
+				outline-offset: 2px;
 			}
 
 			.site-header__word {
