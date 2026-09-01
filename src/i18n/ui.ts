@@ -46,14 +46,14 @@ export const ui = {
 		forYou: {
 			heading: 'Это про вас, если…',
 			items: [
-				{ icon: 'shelf', text: 'Дома больше пары бутылок вина' },
+				{ icon: 'shelf', text: 'Дома больше пары бутылок вина или даже есть винный шкаф или погреб' },
 				{
 					icon: 'globe',
-					text: 'Интересна не только сама дегустация, а культура и история вина',
+					text: 'Интересует не только дегустация, а культура и история вина и всё, что с ним связано',
 				},
 				{
 					icon: 'search',
-					text: 'Хочется порядка в погребе и не тратить время на поиск нужной бутылки',
+					text: 'Хочется порядка в погребе, чтобы не тратить время на поиск нужной бутылки',
 				},
 			],
 		},
@@ -99,9 +99,9 @@ export const ui = {
 			start: {
 				heading: 'Как начать',
 				items: [
-					{ icon: 'download', text: 'Импорт из Vivino' },
-					{ icon: 'cabinet', text: 'Шаблон шкафа' },
-					{ icon: 'packagePlus', text: 'Вино на полку' },
+					{ icon: 'download', text: 'Импортировать из Vivino' },
+					{ icon: 'cabinet', text: 'Создать шаблон шкафа' },
+					{ icon: 'packagePlus', text: 'Поставить вино на полку' },
 				],
 			},
 			capabilities: {
@@ -155,14 +155,14 @@ export const ui = {
 		forYou: {
 			heading: 'This is for you if…',
 			items: [
-				{ icon: 'shelf', text: 'You keep more than a couple of bottles at home' },
+				{ icon: 'shelf', text: 'You keep more than a couple of bottles at home — or already have a wine cabinet or cellar' },
 				{
 					icon: 'globe',
-					text: 'You care about the culture and history of wine, not just the tasting',
+					text: 'You care about the culture, history, and everything else behind a wine — not just the tasting',
 				},
 				{
 					icon: 'search',
-					text: 'You want your cellar organized and hate hunting for the right bottle',
+					text: "You want your cellar organized so you don't waste time hunting for the right bottle",
 				},
 			],
 		},
@@ -209,7 +209,7 @@ export const ui = {
 				heading: 'Getting started',
 				items: [
 					{ icon: 'download', text: 'Import from Vivino' },
-					{ icon: 'cabinet', text: 'Cabinet template' },
+					{ icon: 'cabinet', text: 'Create a cabinet template' },
 					{ icon: 'packagePlus', text: 'Place a wine on the shelf' },
 				],
 			},
