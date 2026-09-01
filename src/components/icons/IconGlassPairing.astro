@@ -1,0 +1,48 @@
+---
+import IconFlute from './IconFlute.astro';
+import IconWine from './IconWine.astro';
+
+interface Props {
+	class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['icon-glass-pairing', className]}>
+	<span class="icon-glass-pairing__back"><IconFlute /></span>
+	<span class="icon-glass-pairing__front"><IconWine /></span>
+</span>
+
+<style>
+	.icon-glass-pairing {
+		position: relative;
+		display: inline-grid;
+		place-items: center;
+		width: 1em;
+		height: 1em;
+	}
+	.icon-glass-pairing__back,
+	.icon-glass-pairing__front {
+		position: absolute;
+		display: block;
+		bottom: 0;
+		width: 0.85em;
+		height: 0.85em;
+	}
+	.icon-glass-pairing__back :global(svg),
+	.icon-glass-pairing__front :global(svg) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.icon-glass-pairing__back {
+		left: -0.2em;
+		transform: rotate(18deg);
+		transform-origin: bottom center;
+	}
+	.icon-glass-pairing__front {
+		right: -0.2em;
+		transform: rotate(-18deg);
+		transform-origin: bottom center;
+	}
+</style>

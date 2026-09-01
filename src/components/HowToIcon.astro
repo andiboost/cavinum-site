@@ -1,0 +1,27 @@
+---
+import IconDownload from './icons/IconDownload.astro';
+import IconCabinet from './icons/IconCabinet.astro';
+import IconPackagePlus from './icons/IconPackagePlus.astro';
+import IconGridLayout from './icons/IconGridLayout.astro';
+import IconSliders from './icons/IconSliders.astro';
+import IconFileText from './icons/IconFileText.astro';
+import IconGlassPairing from './icons/IconGlassPairing.astro';
+
+const icons = {
+	download: IconDownload,
+	cabinet: IconCabinet,
+	packagePlus: IconPackagePlus,
+	gridLayout: IconGridLayout,
+	sliders: IconSliders,
+	fileText: IconFileText,
+	glassPairing: IconGlassPairing,
+} as const;
+
+interface Props {
+	icon: keyof typeof icons;
+}
+const { icon } = Astro.props;
+const Icon = icons[icon];
+---
+
+<Icon />

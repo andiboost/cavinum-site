@@ -39,14 +39,14 @@ const Icon = icons[icon];
 	.card {
 		display: flex;
 		align-items: flex-start;
-		gap: clamp(0.75rem, 2vw, 1.25rem);
+		gap: var(--space-2);
 	}
 	.card--tile {
 		flex-direction: column;
 		align-items: flex-start;
 		background: var(--surface);
 		border-radius: clamp(0.75rem, 1.5vw, 1.25rem);
-		padding: clamp(1.1rem, 2.5vw, 1.6rem);
+		padding: var(--space-3);
 		min-height: 44px;
 	}
 	.card--row {
