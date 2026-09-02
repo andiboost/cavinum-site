@@ -4,7 +4,7 @@ import FeedbackModal from '../components/FeedbackModal.astro';
 import AgeGate from '../components/AgeGate.astro';
 import IconGlassMark from '../components/icons/IconGlassMark.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { ui, defaultLang } from '../i18n/ui';
+import { ui, defaultLang, languages } from '../i18n/ui';
 
 interface Props {
 	title?: string;
@@ -16,6 +16,29 @@ const t = ui[lang];
 const { title = t.title, description = t.meta.description } = Astro.props;
 const privacyHref = getRelativeLocaleUrl(lang, '/privacy');
 const homeHref = getRelativeLocaleUrl(lang, '/');
+
+// Путь без языкового префикса и с конечным слэшем (кроме корня), например
+// '/' или '/privacy/' — каноническая форма URL на этом сервере (см. факт:
+// Apache 301-редиректит /privacy -> /privacy/). Параметрический вывод из
+// текущего маршрута — новые страницы вроде /install подхватятся сами.
+const currentPrefix = lang === defaultLang ? '' : `/${lang}`;
+const rawPath = Astro.url.pathname.startsWith(currentPrefix)
+	? Astro.url.pathname.slice(currentPrefix.length) || '/'
+	: Astro.url.pathname;
+const routePath = rawPath === '/' ? '/' : `${rawPath.replace(/\/$/, '')}/`;
+
+const localeCodes = Object.keys(languages) as (keyof typeof languages)[];
+const toAbsolute = (path: string) => new URL(path, Astro.site).href;
+const canonicalURL = toAbsolute(getRelativeLocaleUrl(lang, routePath));
+const hreflangLinks = localeCodes.map((code) => ({
+	code,
+	href: toAbsolute(getRelativeLocaleUrl(code, routePath)),
+}));
+// x-default — версия для аудитории вне ru/en (не совпадает ни с одним явным
+// hreflang). Здесь указан en как более широко понятный вариант из двух
+// существующих; ru — дефолтная локаль сайта (корень без префикса) — тоже
+// разумный кандидат. Решение окончательное — за Андреем.
+const xDefaultHref = toAbsolute(getRelativeLocaleUrl('en', routePath));
 ---
 
 <html lang={lang}>
@@ -26,6 +49,11 @@ const homeHref = getRelativeLocaleUrl(lang, '/');
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="google-site-verification" content="tgvbdDx95LmELM7HT4DHmcUH7xNQAFZmAE1YMIwBob8" />
+		<link rel="canonical" href={canonicalURL} />
+		{hreflangLinks.map((alt) => (
+			<link rel="alternate" hreflang={alt.code} href={alt.href} />
+		))}
+		<link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 		<title>{title}</title>
 	</head>
 	<body>

@@ -13,6 +13,7 @@
     "deploy": "astro build && node scripts/deploy.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.2.8"
   },
   "allowScripts": {
