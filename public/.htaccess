@@ -1,0 +1,86 @@
+# cavinum.me — боевой .htaccess.
+#
+# Nginx перед Apache уже сделал HTTP->HTTPS и проксирует X-Forwarded-Proto,
+# но эти правила специально не полагаются на то, что Apache знает о схеме:
+# Location строится с явным https://cavinum.me/ во всех случаях.
+
+<IfModule mod_dir.c>
+	# Свой редирект на слеш (правило 5 ниже) полностью заменяет DirectorySlash.
+	# Родной DirectorySlash не знает про X-Forwarded-Proto и отдавал
+	# Location: http://... — подтверждено админом как штатное поведение,
+	# а не баг конфигурации, поэтому выключаем его целиком, а не полагаемся
+	# на то, что mod_rewrite успевает сработать раньше него. Два механизма,
+	# делающих одно и то же по-разному, — источник ровно этого расхождения.
+	DirectorySlash Off
+</IfModule>
+
+# Без DirectorySlash при промахе (путь-директория, не покрытый правилом 5
+# ниже) Apache либо отдаст index-файл под неверным URL, либо, если совпадения
+# по индексу нет — листинг каталога. Правило 5 покрывает все директории
+# параметрически (проверка -d, а не список путей), но это защита на случай
+# нештатной ситуации, а не расчёт на неё.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	# --- 1. Боты поисковиков никогда не редиректятся по языку -------------
+	# Обе версии (ru и en) должны быть доступны ботам как есть по прямому
+	# URL, иначе Google проиндексирует главную ru-страницу как "редиректящую".
+	RewriteCond %{HTTP_USER_AGENT} (Googlebot|Google-InspectionTool|AdsBot-Google|bingbot|BingPreview|msnbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|YandexImages|Sogou|Exabot|facebookexternalhit|Twitterbot|LinkedInBot|Applebot|SemrushBot|AhrefsBot|MJ12bot|PetalBot) [NC]
+	RewriteRule ^ - [E=CAVINUM_BOT:1]
+
+	# --- 2. Явный выбор пользователя (cookie от переключателя языка) ------
+	RewriteCond %{HTTP_COOKIE} (^|;\s*)cavinum_lang=ru(;|$) [NC]
+	RewriteRule ^ - [E=CAVINUM_COOKIE_RU:1]
+
+	RewriteCond %{HTTP_COOKIE} (^|;\s*)cavinum_lang=en(;|$) [NC]
+	RewriteRule ^ - [E=CAVINUM_COOKIE_EN:1]
+
+	# --- 3. Есть ли где-то в Accept-Language тег с префиксом ru -----------
+	# Смотрим весь список (ru-RU,ru;q=0.9,en;q=0.8 — тоже матчит), не только
+	# первый язык.
+	RewriteCond %{HTTP_ACCEPT_LANGUAGE} (^|,)\s*ru(-[A-Za-z]{2,3})?\s*(;|,|$) [NC]
+	RewriteRule ^ - [E=CAVINUM_LANG_RU:1]
+
+	# --- 4. Нужен ли префикс /en? -------------------------------------------
+	# Правило однонаправленное: трогаем только пути без /en/ в начале,
+	# обратного en->ru редиректа нет — циклов быть не может.
+	# Файлы/ассеты (с расширением в конце пути — .css, .php, .svg и т.п.)
+	# не трогаем — на них язык не распространяется.
+
+	# 4a: явный cookie=en перевешивает Accept-Language (но не cookie=ru).
+	# !^/en(/|$) — а не !^/en/ — иначе голый "/en" (без слеша) не считается
+	# "уже английским" и получает второй /en поверх первого (/en/en/).
+	RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+	RewriteCond %{REQUEST_URI} !^/en(/|$)
+	RewriteCond %{ENV:CAVINUM_BOT} !=1
+	RewriteCond %{ENV:CAVINUM_COOKIE_RU} !=1
+	RewriteCond %{ENV:CAVINUM_COOKIE_EN} =1
+	RewriteRule ^ - [E=CAVINUM_EN_PREFIX:/en]
+
+	# 4b: нет cookie вообще, и среди Accept-Language нет ru — по умолчанию en.
+	RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+	RewriteCond %{REQUEST_URI} !^/en(/|$)
+	RewriteCond %{ENV:CAVINUM_BOT} !=1
+	RewriteCond %{ENV:CAVINUM_COOKIE_RU} !=1
+	RewriteCond %{ENV:CAVINUM_COOKIE_EN} !=1
+	RewriteCond %{ENV:CAVINUM_LANG_RU} !=1
+	RewriteRule ^ - [E=CAVINUM_EN_PREFIX:/en]
+
+	# --- 5. Нужен ли завершающий слеш? --------------------------------------
+	# Тот же тест, что делал бы DirectorySlash (реальная директория без
+	# слеша на конце), но без него самого — см. блок mod_dir выше.
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteCond %{REQUEST_URI} !/$
+	RewriteRule ^ - [E=CAVINUM_SLASH:/]
+
+	# --- 6. Один внешний редирект, если сработало 4 и/или 5 -----------------
+	# Оба флага применяются в одном правиле и в одной подстановке — если
+	# нужны и /en, и слеш (например, англоязычный заходит на /privacy),
+	# получаем сразу https://cavinum.me/en/privacy/ одним 301, а не два
+	# редиректа подряд.
+	RewriteCond %{ENV:CAVINUM_EN_PREFIX} =/en [OR]
+	RewriteCond %{ENV:CAVINUM_SLASH} =/
+	RewriteRule ^(.*)$ https://cavinum.me%{ENV:CAVINUM_EN_PREFIX}/$1%{ENV:CAVINUM_SLASH} [R=301,L]
+</IfModule>

@@ -15,12 +15,26 @@ const currentPath = Astro.url.pathname.includes('privacy') ? '/privacy' : '/';
 				href={getRelativeLocaleUrl(lang, currentPath)}
 				aria-current={lang === currentLocale ? 'page' : undefined}
 				aria-label={label}
+				data-lang={lang}
 			>
 				<IconWineGlassHoriz class="lang-switch__glass" code={lang.toUpperCase()} flip={i === 1} />
 			</a>
 		))
 	}
 </nav>
+
+<script>
+	// Явный выбор языка перевешивает Accept-Language-редирект в .htaccess
+	// (правило 4a/4b) — держится год, пока пользователь не переключит сам.
+	document.querySelectorAll<HTMLAnchorElement>('.lang-switch__link[data-lang]').forEach((link) => {
+		link.addEventListener('click', () => {
+			const lang = link.dataset.lang;
+			if (!lang) return;
+			const maxAge = 60 * 60 * 24 * 365;
+			document.cookie = `cavinum_lang=${lang}; path=/; max-age=${maxAge}; SameSite=Lax`;
+		});
+	});
+</script>
 
 <style>
 	.lang-switch {
