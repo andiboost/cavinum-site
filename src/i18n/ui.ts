@@ -118,7 +118,7 @@ export const ui = {
 			title: 'Cavinum — страница не найдена',
 			heading: 'Такой страницы не существует',
 			home: 'На главную',
-			value: 'Найти бутылку в винном погребе за 60 секунд',
+			value: 'Найти бутылку в шкафу за 60 секунд',
 		},
 	},
 	en: {
@@ -233,7 +233,7 @@ export const ui = {
 			title: 'Cavinum — Page Not Found',
 			heading: "This page doesn't exist",
 			home: 'Back to homepage',
-			value: 'Found in 60 seconds',
+			value: 'Found the bottle in 60 seconds',
 		},
 	},
 } as const;
