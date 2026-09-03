@@ -24,14 +24,17 @@ const currentPath = Astro.url.pathname.includes('privacy') ? '/privacy' : '/';
 </nav>
 
 <script>
-	// Явный выбор языка перевешивает Accept-Language-редирект в .htaccess
-	// (правило 4a/4b) — держится год, пока пользователь не переключит сам.
+	// Явный выбор языка перевешивает автоопределение в Base.astro —
+	// держится, пока пользователь не переключит сам (localStorage, не
+	// сессия). Раньше это была cookie для серверного редиректа в .htaccess;
+	// теперь определение языка целиком на клиенте, cookie не нужна.
 	document.querySelectorAll<HTMLAnchorElement>('.lang-switch__link[data-lang]').forEach((link) => {
 		link.addEventListener('click', () => {
 			const lang = link.dataset.lang;
 			if (!lang) return;
-			const maxAge = 60 * 60 * 24 * 365;
-			document.cookie = `cavinum_lang=${lang}; path=/; max-age=${maxAge}; SameSite=Lax`;
+			try {
+				localStorage.setItem('cavinum-lang', lang);
+			} catch (e) {}
 		});
 	});
 </script>

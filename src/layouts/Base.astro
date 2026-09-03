@@ -44,6 +44,43 @@ const xDefaultHref = toAbsolute(getRelativeLocaleUrl('en', routePath));
 <html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
+		<script is:inline>
+			// Блокирующий, до отрисовки — иначе возрастной попап на / успеет
+			// мигнуть русским текстом перед переходом на /en/.
+			// Серверный редирект по Accept-Language убрали (заголовок не
+			// доходил через nginx->Apache, см. историю .htaccess) — язык
+			// теперь определяется здесь же, в браузере.
+			(function () {
+				try {
+					var path = location.pathname;
+					if (path === '/en' || path.indexOf('/en/') === 0) return;
+
+					var stored;
+					try {
+						stored = localStorage.getItem('cavinum-lang');
+					} catch (e) {}
+					// Явный выбор работает в обе стороны: en уводит на /en/ даже
+					// если до этого путь был русским, ru — всегда остаётся на
+					// месте. Только при отсутствии явного выбора смотрим язык
+					// браузера.
+					if (stored === 'en') {
+						location.replace('/en' + path + location.search + location.hash);
+						return;
+					}
+					if (stored === 'ru') return;
+
+					var langs =
+						navigator.languages && navigator.languages.length
+							? navigator.languages
+							: [navigator.language || ''];
+					for (var i = 0; i < langs.length; i++) {
+						if (/^ru(-|$)/i.test(langs[i])) return;
+					}
+
+					location.replace('/en' + path + location.search + location.hash);
+				} catch (e) {}
+			})();
+		</script>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
