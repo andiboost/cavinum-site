@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import NotFoundSection from '../components/NotFoundSection.astro';
+import { ui } from '../i18n/ui';
+
+const t = ui.ru.notFound;
+---
+
+<Base title={t.title} description={t.title}>
+	<NotFoundSection />
+</Base>

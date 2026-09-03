@@ -1,0 +1,129 @@
+---
+import IconSearch from './icons/IconSearch.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { ui, defaultLang } from '../i18n/ui';
+
+const lang = (Astro.currentLocale ?? defaultLang) as keyof typeof ui;
+const t = ui[lang];
+
+const homeHref = getRelativeLocaleUrl(lang, '/');
+// Ведёт туда же, куда кнопки лендинга (#download на главной) — реального
+// стора/установщика ещё нет. Заменить на getRelativeLocaleUrl(lang, '/install')
+// после появления этой страницы.
+const downloadHref = `${homeHref}#download`;
+---
+
+<section class="notfound">
+	<p class="notfound__eyebrow">404 · {t.notFound.heading}</p>
+	<p class="notfound__tagline">{t.hero.tagline}</p>
+	<p class="notfound__subtitle">{t.hero.subtitle}</p>
+
+	<div class="notfound__value">
+		<span class="notfound__value-icon" aria-hidden="true"><IconSearch /></span>
+		<p class="notfound__value-text">{t.notFound.value}</p>
+	</div>
+
+	<a class="notfound__cta" href={downloadHref}>{t.hero.cta}</a>
+
+	<nav class="notfound__links" aria-label="Links">
+		<a href={homeHref}>{t.notFound.home}</a>
+	</nav>
+</section>
+
+<style>
+	.notfound {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--space-3);
+		max-width: 48rem;
+		margin-inline: auto;
+		padding-block: var(--space-4) var(--space-5);
+		padding-inline: clamp(1rem, 5vw, 3rem);
+	}
+
+	.notfound__eyebrow {
+		margin: 0;
+		font-weight: 700;
+		font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+		letter-spacing: 0.02em;
+		color: color-mix(in srgb, var(--ink) 55%, transparent);
+	}
+
+	.notfound__tagline {
+		margin: 0;
+		font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		color: var(--accent);
+		max-width: 34rem;
+	}
+
+	.notfound__subtitle {
+		margin: 0;
+		font-size: clamp(1rem, 2.2vw, 1.25rem);
+		color: color-mix(in srgb, var(--ink) 75%, transparent);
+		max-width: 38rem;
+	}
+
+	.notfound__value {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-2);
+		margin-block-start: var(--space-1);
+	}
+
+	.notfound__value-icon {
+		display: inline-flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: clamp(3.5rem, 8vw, 4.5rem);
+		height: clamp(3.5rem, 8vw, 4.5rem);
+		border-radius: 50%;
+		background: var(--accent);
+		color: var(--paper);
+	}
+
+	.notfound__value-icon :global(svg) {
+		width: 45%;
+		height: 45%;
+		stroke-width: 2.25;
+	}
+
+	.notfound__value-text {
+		margin: 0;
+		max-width: 26rem;
+		font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+		font-weight: 700;
+		line-height: 1.3;
+	}
+
+	.notfound__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		min-width: 44px;
+		padding: 1rem 2.25rem;
+		border-radius: 999px;
+		background: var(--accent);
+		color: var(--paper);
+		text-decoration: none;
+		font-weight: 600;
+		font-size: clamp(1rem, 2vw, 1.2rem);
+	}
+
+	.notfound__links {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.notfound__links a {
+		color: color-mix(in srgb, var(--ink) 65%, transparent);
+		font-size: 0.9rem;
+		text-decoration: underline;
+	}
+</style>

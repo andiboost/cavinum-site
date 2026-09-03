@@ -114,6 +114,12 @@ export const ui = {
 				],
 			},
 		},
+		notFound: {
+			title: 'Cavinum — страница не найдена',
+			heading: 'Такой страницы не существует',
+			home: 'На главную',
+			value: 'Найти бутылку в винном погребе за 60 секунд',
+		},
 	},
 	en: {
 		title: 'Cavinum',
@@ -222,6 +228,12 @@ export const ui = {
 					{ icon: 'glassPairing', text: 'Glass pairing' },
 				],
 			},
+		},
+		notFound: {
+			title: 'Cavinum — Page Not Found',
+			heading: "This page doesn't exist",
+			home: 'Back to homepage',
+			value: 'Found in 60 seconds',
 		},
 	},
 } as const;

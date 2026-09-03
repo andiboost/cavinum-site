@@ -12,5 +12,12 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
-	integrations: [sitemap()],
+	integrations: [
+		sitemap({
+			// Корневой 404.astro Astro исключает сам (специальный /404.html), но
+			// вложенный src/pages/en/404.astro — обычный маршрут (/en/404/) и без
+			// явного фильтра тоже попадает в sitemap. Проверено сборкой.
+			filter: (page) => !page.endsWith('/en/404/'),
+		}),
+	],
 });
