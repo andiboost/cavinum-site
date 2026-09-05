@@ -29,16 +29,10 @@ const t = ui.en.privacy;
 
 		<h2>Google Drive sync (optional)</h2>
 		<p>
-			If you connect your Google account, the app requests the Google OAuth drive.file scope — a
+			If you connect your Google account, the app requests Google OAuth permission — a
 			restricted Google permission that grants access only to files the app itself has created. The
 			app creates a single file (cavinum.db) inside a dedicated "Cavinum" folder in your Drive, and
 			cannot see, read, or modify any other files, folders, or data in your Google account.
-		</p>
-		<p>
-			The authorization-code-to-token exchange technically passes through the developer's own proxy
-			server (a Cloudflare Worker), required by the OAuth protocol. The proxy does not store or log
-			your tokens or any personal data — it only relays the request to Google and returns the
-			response.
 		</p>
 		<p>
 			Google Drive access tokens are stored locally in your browser (localStorage) and are never
@@ -47,13 +41,14 @@ const t = ui.en.privacy;
 		<p>
 			When you first connect Google Drive, the app sends the developer a single message with your
 			email address, your chosen access tier (free/Pro), and the connection time. This is used only
-			for internal usage statistics and is never published or shared with third parties.
+			to confirm your licence tier and for internal usage statistics, and is never published or
+			shared with third parties.
 		</p>
 
 		<h2>What the app does NOT do</h2>
 		<ul>
 			<li>No selling or sharing your data with third parties.</li>
-			<li>No data collection without your explicit action (adding a wine, connecting Drive, etc.).</li>
+			<li>Does not collect data about you or your actions — adding wine, connecting Drive, and so on — other than the technical message described above</li>
 		</ul>
 
 		<h2>Managing your data</h2>
@@ -64,7 +59,7 @@ const t = ui.en.privacy;
 			</li>
 			<li>
 				The cavinum.db file in your Google Drive remains entirely under your control — you can
-				delete it directly via drive.google.com at any time.
+				delete it directly through the Google Drive interface at any time.
 			</li>
 			<li>
 				You can clear all local app data via your browser's site data settings, or via the app's
