@@ -32,9 +32,11 @@ export const ui = {
 		},
 		ageGate: {
 			question: 'Вам уже можно пить вино?',
-			yes: 'Да',
-			no: 'Нет',
-			blocked: 'Извините, сайт с возрастными ограничениями. Заходите, когда будет можно.',
+			yes: 'Да, мне уже есть 18 лет и я могу пить вино',
+			no: 'Нет, я ещё не созрел',
+			blocked: 'Извините, сайт с возрастными ограничениями. Заходите, когда будет можно',
+			warning: 'Чрезмерное употребление алкоголя вредит вашему здоровью',
+			leave: 'Уйти с сайта',
 		},
 		hero: {
 			title: ['Ваш винный погреб', 'История в каждой бутылке'],
@@ -147,16 +149,18 @@ export const ui = {
 		},
 		ageGate: {
 			question: 'Old enough to drink wine?',
-			yes: 'Yes',
-			no: 'No',
-			blocked: "Sorry — this site is age-restricted. Come back when you're old enough.",
+			yes: "Yes, I'm over 18 and can drink wine",
+			no: 'No, still not aged enough',
+			blocked: "Sorry — this site is age-restricted. Come back when you're old enough",
+			warning: 'Excessive alcohol consumption is harmful to your health',
+			leave: 'Leave the site',
 		},
 		hero: {
 			title: ['Your wine cellar', 'A story in every bottle'],
 			subtitle:
 				"Cavinum helps you track your wine collection and uncover the culture, history, and legends behind every bottle — no sommelier training required",
 			cta: 'Download for free',
-			tagline: 'Cavinum works with Vivino, not instead of it.',
+			tagline: 'Cavinum works with Vivino, not instead of it',
 		},
 		forYou: {
 			heading: 'This is for you if…',
